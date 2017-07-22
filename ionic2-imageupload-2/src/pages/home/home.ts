@@ -68,7 +68,7 @@ export class HomePage {
       this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
     }
   }, (err) => {
-    this.presentToast('Error while selecting image.');
+    this.presentToast(err);
   });
 }
 // Create a new name for the image
@@ -107,7 +107,7 @@ public pathForImage(img) {
 }
 public uploadImage() {
   // Destination URL
-  var url = "http://192.168.2.240/upload.php";
+  var url = "http://106.14.20.149:5050/File/upLoadFile.ashx ";
 
   // File for Upload
   var targetPath = this.pathForImage(this.lastImage);
@@ -132,11 +132,12 @@ public uploadImage() {
 
   // Use the FileTransfer to upload the image
   fileTransfer.upload(targetPath, url, options).then(data => {
-    this.loading.dismissAll()
+    this.loading.dismissAll();
     this.presentToast('Image succesful uploaded.');
+    console.log(data.response);
   }, err => {
-    this.loading.dismissAll()
-    this.presentToast('Error while uploading file.');
+    this.loading.dismissAll();
+    this.presentToast(err);
   });
 }
 }
